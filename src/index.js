@@ -1,8 +1,15 @@
+/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable no-undef */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.jsx';
+import { Provider } from 'react-redux';
+import App from './App';
+import store from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// eslint-disable-next-line react/jsx-filename-extension
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);
