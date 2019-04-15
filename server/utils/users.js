@@ -22,5 +22,13 @@ module.exports = [
     email: 'jane.doe@example.com',
     username: 'janedoe',
     password: '$2a$10$3MZbiPc1GPNnMdEfqeteGOslIQwhFpQv/ZQqTzt/zfP1lIyvI5WEy' // password
+  },
+  {
+    id: 4,
+    name: 'Thiago',
+    phone: '99999999999',
+    email: 'thiago.a.vieira@hotmail.com',
+    username: 'Thivieira',
+    password: '$2a$10$3MZbiPc1GPNnMdEfqeteGOslIQwhFpQv/ZQqTzt/zfP1lIyvI5WEy' // password
   }
 ];

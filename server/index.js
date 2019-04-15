@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const middlewares = require('./utils/middlewares');
 const auth = require('./auth');
 
@@ -9,6 +10,18 @@ const app = express();
 
 app.use(bodyParser.json());
 
+const whitelist = ['http://localhost'];
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
 app.use(express.static('dist'));
 
 app.use('/api/', auth);

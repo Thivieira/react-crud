@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import { Container, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import axios from 'axios';
 import BaseLayout from './layouts/BaseLayout';
 import FormErrors from './components/FormErrors';
 
@@ -27,10 +29,17 @@ export default class Login extends React.Component {
       passwordValid: false,
       formValid: false
     };
+    this.handleUserInput = this.handleUserInput.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmit(e) {
+    console.log(this.state);
+    const { email, password } = this.state;
     e.preventDefault();
+    axios.post('http://localhost:9000/api/users/signin', { email, password }).then(res => {
+      console.log(res);
+    });
   }
 
   handleUserInput(e) {
