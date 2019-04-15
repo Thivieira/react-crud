@@ -10,15 +10,15 @@ const app = express();
 
 app.use(bodyParser.json());
 
-const whitelist = ['http://localhost'];
+const whitelist = ['http://localhost:8080'];
 const corsOptions = {
-  origin: function(origin, callback) {
+  /*   origin: function(origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
-  }
+  } */
 };
 
 app.use(cors(corsOptions));

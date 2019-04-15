@@ -8,8 +8,14 @@ const generateToken = require('./utils').generateToken;
 const users = require('./utils/users');
 
 router.post('/users/signin', function(req, res) {
-  const user = users.find(function(user) {
-    return user.username === req.body.username;
+  let user;
+  user = users.find(function(u) {
+    console.log(u.username);
+    return u.username === req.body.identifier
+      ? true
+      : u.email === req.body.identifier
+      ? true
+      : false;
   });
 
   if (user === undefined) {

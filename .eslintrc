@@ -3,13 +3,9 @@
   "env": {
     "browser": true
   },
-  "plugins": [
-    "prettier",
-    "react",
-    "jsx-a11y",
-    "import"
-  ],
+  "plugins": ["prettier", "react", "jsx-a11y", "import"],
   "rules": {
-    "prettier/prettier": ["error"]
+    "prettier/prettier": ["error"],
+    "react/jsx-one-expression-per-line": "disable"
   }
 }

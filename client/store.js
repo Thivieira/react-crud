@@ -7,10 +7,12 @@ function root(state = initialState, action) {
 }
 
 /* eslint-disable no-underscore-dangle */
-export default createStore(
+const store = createStore(
   combineReducers({
     root
   }),
+
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 /* eslint-enable */
+export default store;

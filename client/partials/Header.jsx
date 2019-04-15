@@ -28,12 +28,12 @@ export default class Header extends React.Component {
           </NavbarBrand>
           <Nav className="d-none d-md-flex navbar">
             <NavItem>
-              <NavLink className="nav-link" to="/">
+              <NavLink className="nav-link" to="/" exact>
                 Home
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="nav-link" to="/login">
+              <NavLink className="nav-link" to="/login" exact>
                 Login
               </NavLink>
             </NavItem>
@@ -46,12 +46,12 @@ export default class Header extends React.Component {
               navbar
             >
               <NavItem>
-                <NavLink className="nav-link" to="/">
+                <NavLink className="nav-link" to="/" exact>
                   Home
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="nav-link" to="/login">
+                <NavLink className="nav-link" to="/login" exact>
                   Login
                 </NavLink>
               </NavItem>
