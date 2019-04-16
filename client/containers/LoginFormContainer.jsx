@@ -1,13 +1,7 @@
-import LoginForm from '../components/LoginForm';
 import { connect } from 'react-redux';
-
-function mapStateToProps(state, ownProps) {
-  return {
-    user: state.user
-  };
-}
+import LoginForm from '../components/LoginForm';
 
 export default connect(
-  mapStateToProps,
+  null,
   null
 )(LoginForm);

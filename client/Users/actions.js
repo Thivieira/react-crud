@@ -10,6 +10,7 @@ export const RESET_TOKEN = 'RESET_TOKEN';
 export const SIGNIN_USER = 'SIGNIN_USER';
 export const SIGNIN_USER_SUCCESS = 'SIGNIN_USER_SUCCESS';
 export const SIGNIN_USER_FAILURE = 'SIGNIN_USER_FAILURE';
+export const RESET_USER = 'RESET_USER';
 
 //called when email is updated in profile to update main user's email state
 export const UPDATE_USER_EMAIL = 'UPDATE_USER_EMAIL';
@@ -87,12 +88,22 @@ export function resetToken() {
   };
 }
 
-export function signInUser(formValues) {
-  const request = axios.post(`${ROOT_URL}/users/signin`, formValues);
-
+export function resetUser() {
   return {
-    type: SIGNIN_USER,
-    payload: request
+    type: RESET_USER
+  };
+}
+
+export function signInUser(formValues) {
+  return dispatch => {
+    axios
+      .post(`${ROOT_URL}/users/signin`, formValues)
+      .then(data => {
+        dispatch(signInUserSuccess(data));
+      })
+      .catch(err => {
+        dispatch(signInUserFailure(err));
+      });
   };
 }
 

@@ -24,23 +24,12 @@ const LoginSchema = Yup.object().shape({
   identifier: Yup.string().required('Campo Obrigatório.')
 });
 
-export default () => (
+export default props => (
   <Formik
     initialValues={{ identifier: '', password: '' }}
     onSubmit={(values, { setSubmitting }) => {
-      axios
-        .post('http://localhost:9000/api/users/signin', {
-          identifier: values.identifier,
-          password: values.password
-        })
-        .then(res => {
-          console.log(res);
-          setSubmitting(false);
-        });
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        setSubmitting(false);
-      }, 500);
+      const { identifier, password } = values;
+      props.dispatch(signInUser({ identifier, password }));
     }}
     validationSchema={LoginSchema}
     render={({ isSubmitting }) => (
@@ -54,7 +43,7 @@ export default () => (
             placeholder="Usuário ou Email"
             autoComplete="username"
           />
-          <ErrorMessage name="email" component="small" className="form-text text-muted" />
+          <ErrorMessage name="identifier" component="small" className="form-text text-muted" />
         </FormGroup>
         <FormGroup>
           <Label htmlFor="password">Senha:</Label>

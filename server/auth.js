@@ -10,33 +10,32 @@ const users = require('./utils/users');
 router.post('/users/signin', function(req, res) {
   let user;
   user = users.find(function(u) {
-    console.log(u.username);
-    return u.username === req.body.identifier
-      ? true
-      : u.email === req.body.identifier
-      ? true
-      : false;
+    return u.username == req.body.identifier ? true : u.email == req.body.identifier ? true : false;
   });
-
   if (user === undefined) {
     return res.status(404).json({
       error: true,
       message: 'Senha ou Usuário estão errados.'
     });
   }
+
+  console.log('req.password: ', req.body.password);
+  console.log('user: ', user);
+  console.log('user.password: ', user.password);
+
   bcrypt.compare(req.body.password, user.password, function(err, valid) {
     if (!valid) {
       return res.status(404).json({
         error: true,
-        message: 'Senha ou Usuário estão errados.'
+        message: 'Senha errada.'
       });
     }
 
     const token = generateToken(user);
-
-    delete user.password;
+    let userCopy = JSON.parse(JSON.stringify(user));
+    delete userCopy.password;
     res.json({
-      user,
+      user: userCopy,
       token
     });
   });
