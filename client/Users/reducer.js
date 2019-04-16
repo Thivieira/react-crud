@@ -46,7 +46,7 @@ const INITIAL_STATE = { user: null, status: null, error: null, loading: false };
 export default function(state = INITIAL_STATE, action) {
   let error;
   switch (action.type) {
-    case ME_FROM_TOKEN: // loading currentUser("me") from jwttoken in local/session storage storage,
+    case ME_FROM_TOKEN: // loading currentUser("me") from token in local/session storage storage,
       return { ...state, user: null, status: 'storage', error: null, loading: true };
     case ME_FROM_TOKEN_SUCCESS: //return user, status = authenticated and make loading = false
       return {

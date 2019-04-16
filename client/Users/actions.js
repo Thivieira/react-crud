@@ -95,17 +95,20 @@ export function resetUser() {
 }
 
 export function signInUser(formValues) {
-  return dispatch => {
-    axios
-      .post(`${ROOT_URL}/users/signin`, formValues)
-      .then(data => {
-        dispatch(signInUserSuccess(data));
-      })
-      .catch(err => {
-        dispatch(signInUserFailure(err));
-      });
+  return (dispatch) => {
+
+      axios
+        .post(`${ROOT_URL}/users/signin`, formValues)
+        .then((data => {
+          console.log(data)
+          dispatch(signInUserSuccess(data.user));
+        })
+        .catch(err => {
+          dispatch(signInUserFailure(err));
+        })
   };
 }
+
 
 export function signInUserSuccess(user) {
   return {

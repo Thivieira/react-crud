@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import LoginForm from '../components/LoginForm';
+import Header from '../partials/Header';
 import { withRouter } from 'react-router-dom';
 
-const LoginFormWithRouter = withRouter(LoginForm);
+const HeaderWithRouter = withRouter(Header);
 export default connect(
   null,
   null
-)(LoginFormWithRouter);
+)(HeaderWithRouter);
