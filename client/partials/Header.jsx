@@ -18,6 +18,10 @@ export default class Header extends React.Component {
     }));
   }
 
+  componentWillMount() {
+    console.log('HEADER isAuthenticated', this.props.isAuthenticated);
+  }
+
   render() {
     const { collapsed } = this.state;
     return (
@@ -32,11 +36,26 @@ export default class Header extends React.Component {
                 Home
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink className="nav-link" to="/login" exact>
-                Login
-              </NavLink>
-            </NavItem>
+            {this.props.isAuthenticated ? (
+              <React.Fragment>
+                <NavItem>
+                  <NavLink className="nav-link" to="/admin" exact>
+                    Admin
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <a className="nav-link" href="#" onClick={this.props.resetMe}>
+                    Logout
+                  </a>
+                </NavItem>
+              </React.Fragment>
+            ) : (
+              <NavItem>
+                <NavLink className="nav-link" to="/login" exact>
+                  Login
+                </NavLink>
+              </NavItem>
+            )}
           </Nav>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2 d-md-none" />
           <Collapse isOpen={collapsed} navbar>

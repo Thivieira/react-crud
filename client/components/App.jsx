@@ -16,7 +16,7 @@ export default class App extends React.Component {
 
   componentWillMount() {
     this.props.loadUserFromToken();
-    console.log('props', this.props);
+    console.log('APP isAuthenticated', this.props.isAuthenticated);
   }
 
   render() {
@@ -28,7 +28,7 @@ export default class App extends React.Component {
           <Route
             path="/admin"
             exact
-            render={() => (!this.props.isAuthenticated ? <Redirect to="/login" /> : <Admin />)}
+            render={() => (this.props.isAuthenticated ? <Admin /> : <Redirect to="/login" />)}
           />
         </Switch>
       </BrowserRouter>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, FormGroup, Label } from 'reactstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { signInUser } from '../actions/userActions';
+import { signInUser } from '../actions/authActions';
 
 const style = {
   form: {

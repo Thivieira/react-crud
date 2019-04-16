@@ -1,6 +1,6 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import user from './reducers/userReducer';
+import auth from './reducers/authReducer';
 import users from './reducers/usersReducer';
 
 const initialState = {};
@@ -17,7 +17,7 @@ const persistedState = localStorage.getItem('reduxState')
 const store = createStore(
   combineReducers({
     root,
-    user,
+    auth,
     users,
     persistedState
   }),

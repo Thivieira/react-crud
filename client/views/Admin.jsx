@@ -4,7 +4,6 @@ import BaseLayout from '../layouts/BaseLayout';
 export default class Admin extends React.Component {
   constructor(props) {
     super(props);
-    props.loadUserFromToken();
   }
   render() {
     return (
