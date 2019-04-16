@@ -21,7 +21,12 @@ import {
 // 5. 'authenticated'(after signin)
 // 6. 'logout' (after logout)
 
-const INITIAL_STATE = { user: { isLoggedIn: false }, status: null, error: null, loading: false };
+const INITIAL_STATE = {
+  user: { isLoggedIn: false },
+  status: 'USER_REDUCER_INIT',
+  error: null,
+  loading: false
+};
 
 export default function(state = INITIAL_STATE, action) {
   let error;
@@ -37,7 +42,7 @@ export default function(state = INITIAL_STATE, action) {
     case ME_FROM_TOKEN_SUCCESS: //return user, status = authenticated and make loading = false
       return {
         ...state,
-        user: action.payload.user,
+        user: { ...action.payload.user, isLoggedIn: true },
         status: 'authenticated',
         error: null,
         loading: false

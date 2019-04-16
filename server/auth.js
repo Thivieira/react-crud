@@ -44,7 +44,6 @@ router.get('/me/from/token', (req, res, next) => {
   }
 
   jwt.verify(token, process.env.JWT_SECRET, (err, userTkn) => {
-    console.log('userTkn', userTkn);
     if (err) throw err;
 
     const user = users.find(function(user) {

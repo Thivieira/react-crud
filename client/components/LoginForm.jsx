@@ -24,7 +24,6 @@ export default props => (
     onSubmit={(values, { setSubmitting }) => {
       const { identifier, password } = values;
       props.dispatch(signInUser({ identifier, password }));
-      console.log('props', props);
       props.history.push('/admin');
     }}
     validationSchema={LoginSchema}

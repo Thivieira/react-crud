@@ -9,8 +9,8 @@ import {
 } from '../actions/userActions';
 
 const mapStateToProps = state => {
-  console.log(state.user);
-  return { isAuthenticated: state.user.user.IsloggedIn || false };
+  console.log('mapStateToProps', state.user.user.isLoggedIn);
+  return { isAuthenticated: state.user.user.isLoggedIn };
 };
 
 const mapDispatchToProps = dispatch => {
