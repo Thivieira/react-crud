@@ -1,6 +1,7 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import users from './Users/reducer';
+import user from './reducers/userReducer';
+import users from './reducers/usersReducer';
 
 const initialState = {};
 
@@ -8,11 +9,17 @@ function root(state = initialState, action) {
   return state;
 }
 
+const persistedState = localStorage.getItem('reduxState')
+  ? JSON.parse(localStorage.getItem('reduxState'))
+  : {};
+
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
   combineReducers({
     root,
-    users
+    user,
+    users,
+    persistedState
   }),
   compose(
     applyMiddleware(thunk),

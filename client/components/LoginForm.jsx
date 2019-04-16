@@ -8,7 +8,7 @@ import {
   signInUserSuccess,
   signInUserFailure,
   resetUserFields
-} from '../Users/actions';
+} from '../actions/userActions';
 
 const style = {
   form: {

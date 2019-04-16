@@ -9,6 +9,8 @@ Part of an interview challenge.
 
 - Inspiration for JWT Auth
   https://medium.com/@rajaraodv/securing-react-redux-apps-with-jwt-tokens-fcfe81356ea0
+  https://scalac.io/react-redux-jwt-authentication/
+  https://github.com/StephenGrider/AdvancedReduxCode
 
 - Inspiration for form validation
   https://learnetto.com/blog/how-to-do-simple-form-validation-in-reactjs
