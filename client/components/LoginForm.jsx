@@ -1,14 +1,8 @@
 import React from 'react';
-import { Container, Button, FormGroup, Label } from 'reactstrap';
-import axios from 'axios';
+import { Button, FormGroup, Label } from 'reactstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import {
-  signInUser,
-  signInUserSuccess,
-  signInUserFailure,
-  resetUserFields
-} from '../actions/userActions';
+import { signInUser } from '../actions/userActions';
 
 const style = {
   form: {
@@ -30,6 +24,7 @@ export default props => (
     onSubmit={(values, { setSubmitting }) => {
       const { identifier, password } = values;
       props.dispatch(signInUser({ identifier, password }));
+      console.log('props', props);
       props.history.push('/admin');
     }}
     validationSchema={LoginSchema}

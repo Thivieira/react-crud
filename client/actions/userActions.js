@@ -18,6 +18,22 @@ export const UPDATE_USER_EMAIL = 'UPDATE_USER_EMAIL';
 //log out user
 export const LOGOUT_USER = 'LOGOUT_USER';
 
+export function meFromToken(tokenFromStorage) {
+  //check if the token is still valid, if so, get me from the server
+  return dispatch => {
+    dispatch({
+      type: ME_FROM_TOKEN
+    });
+    return axios({
+      method: 'get',
+      url: `${ROOT_URL}/me/from/token?token=${tokenFromStorage}`,
+      headers: {
+        Authorization: `Bearer ${tokenFromStorage}`
+      }
+    });
+  };
+}
+
 export function meFromTokenSuccess(currentUser) {
   return {
     type: ME_FROM_TOKEN_SUCCESS,
@@ -50,7 +66,7 @@ export function signInUser(formValues) {
     return axios
       .post(`${ROOT_URL}/users/signin`, formValues)
       .then(({ data }) => {
-        console.log(data);
+        localStorage.setItem('token', data.token);
         dispatch(signInUserSuccess(data));
       })
       .catch(err => {

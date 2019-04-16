@@ -19,10 +19,6 @@ router.post('/users/signin', function(req, res) {
     });
   }
 
-  console.log('req.password: ', req.body.password);
-  console.log('user: ', user);
-  console.log('user.password: ', user.password);
-
   bcrypt.compare(req.body.password, user.password, function(err, valid) {
     if (!valid) {
       return res.status(404).json({
@@ -48,10 +44,11 @@ router.get('/me/from/token', (req, res, next) => {
   }
 
   jwt.verify(token, process.env.JWT_SECRET, (err, userTkn) => {
+    console.log('userTkn', userTkn);
     if (err) throw err;
 
     const user = users.find(function(user) {
-      return user.id.toString() === userTkn.id;
+      return user.id == userTkn.id;
     });
 
     if (user === undefined) {
@@ -60,10 +57,10 @@ router.get('/me/from/token', (req, res, next) => {
         message: 'Token inválido.'
       });
     }
-
-    delete user.password;
+    let userCopy = JSON.parse(JSON.stringify(user));
+    delete userCopy.password;
     res.json({
-      user,
+      user: userCopy,
       token
     });
   });
