@@ -23,7 +23,7 @@ import {
 
 const INITIAL_STATE = {
   user: { isLoggedIn: false },
-  status: 'USER_REDUCER_INIT',
+  status: 'AUTH_REDUCER_INIT',
   error: null,
   loading: false
 };
@@ -35,7 +35,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: { isLoggedIn: false },
-        status: 'storage',
+        status: 'STORAGE',
         error: null,
         loading: true
       };
@@ -43,7 +43,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: { ...action.payload.user, isLoggedIn: true },
-        status: 'authenticated',
+        status: 'AUTHENTICATED',
         error: null,
         loading: false
       }; //<-- authenticated
@@ -52,7 +52,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: { isLoggedIn: false },
-        status: 'storage',
+        status: 'STORAGE',
         error: error,
         loading: false
       };
@@ -60,7 +60,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: { isLoggedIn: false },
-        status: 'storage',
+        status: 'STORAGE',
         error: null,
         loading: false
       };
@@ -69,7 +69,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: { isLoggedIn: false },
-        status: 'signin',
+        status: 'SIGNIN',
         error: null,
         loading: true
       };
@@ -77,7 +77,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: { ...action.payload.user, isLoggedIn: true },
-        status: 'authenticated',
+        status: 'AUTHENTICATED',
         error: null,
         loading: false
       }; //<-- authenticated
@@ -86,7 +86,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: { isLoggedIn: false },
-        status: 'signin',
+        status: 'SIGNIN',
         error: error,
         loading: false
       };
@@ -98,7 +98,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         user: { isLoggedIn: false },
-        status: 'logout',
+        status: 'LOGOUT',
         error: null,
         loading: false
       };

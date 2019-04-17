@@ -27,7 +27,7 @@ export default class App extends React.Component {
           <Route
             path="/admin"
             exact
-            render={() => (this.props.isAuthenticated ? <Admin /> : <Redirect to="/login" />)}
+            render={props => (props.isAuthenticated ? <Admin /> : <Redirect to="/login" />)}
           />
         </Switch>
       </BrowserRouter>
