@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Button, FormGroup, Label } from 'reactstrap';
 import BaseLayout from '../layouts/BaseLayout';
 import LoginFormContainer from '../containers/LoginFormContainer';
+
 const style = {
   container: {
     paddingTop: 25
@@ -10,6 +11,7 @@ const style = {
     marginBottom: 25
   }
 };
+
 export default () => (
   <BaseLayout>
     <Container

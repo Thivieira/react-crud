@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, FormGroup, Label } from 'reactstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { signInUser } from '../actions/authActions';
+import { signInUser, signInUserSuccess, signInUserFailure } from '../actions/authActions';
 
 const style = {
   form: {
@@ -21,10 +21,21 @@ const LoginSchema = Yup.object().shape({
 export default props => (
   <Formik
     initialValues={{ identifier: '', password: '' }}
-    onSubmit={(values, { setSubmitting }) => {
+    enableReinitialize
+    onSubmit={(values, actions) => {
       const { identifier, password } = values;
-      props.dispatch(signInUser({ identifier, password }));
-      props.history.push('/admin');
+      props
+        .dispatch(signInUser({ identifier, password }))
+        .then(({ data }) => {
+          actions.setSubmitting(false);
+          localStorage.setItem('token', data.token);
+          props.dispatch(signInUserSuccess(data));
+          props.history.push('/admin');
+        })
+        .catch(err => {
+          actions.setSubmitting(false);
+          props.dispatch(signInUserFailure(err));
+        });
     }}
     validationSchema={LoginSchema}
     render={({ isSubmitting }) => (

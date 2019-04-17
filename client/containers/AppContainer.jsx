@@ -4,6 +4,7 @@ import App from '../components/App';
 import { meFromToken, meFromTokenSuccess, meFromTokenFailure } from '../actions/authActions';
 
 const mapStateToProps = state => {
+  console.log('STATE', state.auth.user);
   return { isAuthenticated: state.auth.user.isLoggedIn };
 };
 

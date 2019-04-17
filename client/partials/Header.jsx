@@ -18,8 +18,8 @@ export default class Header extends React.Component {
     }));
   }
 
-  componentWillMount() {
-    console.log('HEADER isAuthenticated', this.props.isAuthenticated);
+  componentDidMount() {
+    console.log('HEADER isAuthenticated (header componentDidMount)', this.props.isAuthenticated);
   }
 
   render() {

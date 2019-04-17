@@ -63,15 +63,11 @@ export function resetUser() {
 
 export function signInUser(formValues) {
   return dispatch => {
-    return axios
-      .post(`${ROOT_URL}/users/signin`, formValues)
-      .then(({ data }) => {
-        localStorage.setItem('token', data.token);
-        dispatch(signInUserSuccess(data));
-      })
-      .catch(err => {
-        dispatch(signInUserFailure(err));
-      });
+    return axios({
+      method: 'post',
+      url: `${ROOT_URL}/users/signin`,
+      data: formValues
+    });
   };
 }
 
