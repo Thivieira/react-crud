@@ -22,7 +22,7 @@ import {
 // 6. 'logout' (after logout)
 
 const INITIAL_STATE = {
-  user: { isLoggedIn: false },
+  user: { token: null },
   status: 'AUTH_REDUCER_INIT',
   error: null,
   loading: false
@@ -34,7 +34,7 @@ export default function(state = INITIAL_STATE, action) {
     case ME_FROM_TOKEN: // loading currentUser("me") from token in local/session storage storage,
       return {
         ...state,
-        user: { isLoggedIn: false },
+        user: { token: null },
         status: 'STORAGE',
         error: null,
         loading: true
@@ -42,7 +42,7 @@ export default function(state = INITIAL_STATE, action) {
     case ME_FROM_TOKEN_SUCCESS: //return user, status = authenticated and make loading = false
       return {
         ...state,
-        user: { ...action.payload.user, isLoggedIn: true },
+        user: { ...action.payload.user, token: action.payload.token },
         status: 'AUTHENTICATED',
         error: null,
         loading: false
@@ -51,7 +51,7 @@ export default function(state = INITIAL_STATE, action) {
       error = action.payload.data || { message: action.payload.message }; //2nd one is network or server down errors
       return {
         ...state,
-        user: { isLoggedIn: false },
+        user: { token: null },
         status: 'STORAGE',
         error: error,
         loading: false
@@ -59,7 +59,7 @@ export default function(state = INITIAL_STATE, action) {
     case RESET_TOKEN: // remove token from storage make loading = false
       return {
         ...state,
-        user: { isLoggedIn: false },
+        user: { token: null },
         status: 'STORAGE',
         error: null,
         loading: false
@@ -68,7 +68,7 @@ export default function(state = INITIAL_STATE, action) {
     case LOGIN_USER: // sign in user,  set loading = true and status = signin
       return {
         ...state,
-        user: { isLoggedIn: false },
+        user: { token: null },
         status: 'SIGNIN',
         error: null,
         loading: true
@@ -76,7 +76,7 @@ export default function(state = INITIAL_STATE, action) {
     case LOGIN_USER_SUCCESS: //return authenticated user,  make loading = false and status = authenticated
       return {
         ...state,
-        user: { ...action.payload.user, isLoggedIn: true },
+        user: { ...action.payload.user, token: action.payload.token },
         status: 'AUTHENTICATED',
         error: null,
         loading: false
@@ -85,26 +85,29 @@ export default function(state = INITIAL_STATE, action) {
       error = action.payload.data || { message: action.payload.message }; //2nd one is network or server down errors
       return {
         ...state,
-        user: { isLoggedIn: false },
+        user: { token: null },
         status: 'SIGNIN',
         error: error,
         loading: false
       };
 
     case UPDATE_USER_EMAIL:
-      return { ...state, user: { ...state.user, email: action.payload.email, isLoggedIn: true } };
+      return {
+        ...state,
+        user: { ...state.user, email: action.payload.email, token: action.payload.token }
+      };
 
     case LOGOUT_USER:
       return {
         ...state,
-        user: { isLoggedIn: false },
+        user: { token: null },
         status: 'LOGOUT',
         error: null,
         loading: false
       };
 
     case RESET_USER: // reset authenticated user to initial state
-      return { ...state, user: { isLoggedIn: false }, status: null, error: null, loading: false };
+      return { ...state, user: { token: null }, status: null, error: null, loading: false };
 
     default:
       return state;

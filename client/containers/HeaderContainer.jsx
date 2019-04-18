@@ -3,16 +3,10 @@ import Header from '../partials/Header';
 import { withRouter } from 'react-router-dom';
 import { resetToken } from '../actions/authActions';
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.auth.user.isLoggedIn
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     resetMe: () => {
-      // logout
+      console.log('ue');
       localStorage.removeItem('token');
       dispatch(resetToken());
     }
@@ -22,6 +16,6 @@ const mapDispatchToProps = dispatch => {
 const HeaderWithRouter = withRouter(Header);
 
 export default connect(
-  mapStateToProps,
+  state => ({ user: state.auth.user }),
   mapDispatchToProps
 )(HeaderWithRouter);

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container, Jumbotron, Button } from 'reactstrap';
 import BaseLayout from '../layouts/BaseLayout';
-export default class Admin extends React.Component {
+import AuthContainer from '../containers/AuthContainer';
+class Admin extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,10 +11,12 @@ export default class Admin extends React.Component {
       <BaseLayout>
         <Container>
           <Jumbotron>
-            <h1 className="display-3">Admin, você está logado.</h1>
+            <h1 className="display-3">{this.props.user.username}, você está logado.</h1>
           </Jumbotron>
         </Container>
       </BaseLayout>
     );
   }
 }
+
+export default AuthContainer(Admin);

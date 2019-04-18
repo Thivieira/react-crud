@@ -1,15 +1,31 @@
 import React from 'react';
-import { Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import {
+  Container,
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from 'reactstrap';
+
 import { NavLink } from 'react-router-dom';
 
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: false
+      collapsed: false,
+      dropdownOpen: false
     };
+
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
   toggleNavbar() {
@@ -18,12 +34,15 @@ export default class Header extends React.Component {
     }));
   }
 
-  componentDidMount() {
-    console.log('HEADER isAuthenticated (header componentDidMount)', this.props.isAuthenticated);
+  toggleDropdown() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
   }
 
   render() {
     const { collapsed } = this.state;
+    const { user, resetMe } = this.props;
     return (
       <Container>
         <Navbar color="faded" light>
@@ -36,18 +55,24 @@ export default class Header extends React.Component {
                 Home
               </NavLink>
             </NavItem>
-            {this.props.isAuthenticated ? (
+            {user.token ? (
               <React.Fragment>
                 <NavItem>
                   <NavLink className="nav-link" to="/admin" exact>
                     Admin
                   </NavLink>
                 </NavItem>
-                <NavItem>
-                  <a className="nav-link" href="#" onClick={this.props.resetMe}>
-                    Logout
-                  </a>
-                </NavItem>
+                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown} nav>
+                  <DropdownToggle tag="a" href="#" className="nav-link" caret>
+                    {user.username}
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>Perfil</DropdownItem>
+                    <DropdownItem tag="a" className="nav-link" href="#" onClick={resetMe}>
+                      Logout
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
               </React.Fragment>
             ) : (
               <NavItem>
@@ -69,11 +94,32 @@ export default class Header extends React.Component {
                   Home
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink className="nav-link" to="/login" exact>
-                  Login
-                </NavLink>
-              </NavItem>
+              {user.token ? (
+                <React.Fragment>
+                  <NavItem>
+                    <NavLink className="nav-link" to="/admin" exact>
+                      Admin
+                    </NavLink>
+                  </NavItem>
+                  <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown} nav>
+                    <DropdownToggle tag="a" href="#" className="nav-link" caret>
+                      {user.username}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem>Perfil</DropdownItem>
+                      <DropdownItem tag="a" className="nav-link" href="#" onClick={resetMe}>
+                        Sair
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+                </React.Fragment>
+              ) : (
+                <NavItem>
+                  <NavLink className="nav-link" to="/login" exact>
+                    Login
+                  </NavLink>
+                </NavItem>
+              )}
             </Nav>
           </Collapse>
         </Navbar>

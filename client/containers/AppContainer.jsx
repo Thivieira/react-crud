@@ -1,12 +1,6 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import App from '../components/App';
 import { meFromToken, meFromTokenSuccess, meFromTokenFailure } from '../actions/authActions';
-
-const mapStateToProps = state => {
-  console.log('STATE APP CONTAINER', state.auth.user);
-  return { isAuthenticated: state.auth.user.isLoggedIn };
-};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -30,6 +24,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(App);
