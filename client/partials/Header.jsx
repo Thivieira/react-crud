@@ -56,7 +56,7 @@ export default class Header extends React.Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link" to="/perfil" exact>
+                  <NavLink className="nav-link" to="/profile" exact>
                     {user.username}
                   </NavLink>
                 </NavItem>
@@ -67,11 +67,18 @@ export default class Header extends React.Component {
                 </NavItem>
               </React.Fragment>
             ) : (
-              <NavItem>
-                <NavLink className="nav-link" to="/login" exact>
-                  Login
-                </NavLink>
-              </NavItem>
+              <React.Fragment>
+                <NavItem>
+                  <NavLink className="nav-link" to="/register" exact>
+                    Register
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/login" exact>
+                    Login
+                  </NavLink>
+                </NavItem>
+              </React.Fragment>
             )}
           </Nav>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2 d-md-none" />
@@ -105,11 +112,18 @@ export default class Header extends React.Component {
                   </NavItem>
                 </React.Fragment>
               ) : (
-                <NavItem>
-                  <NavLink className="nav-link" to="/login" exact>
-                    Login
-                  </NavLink>
-                </NavItem>
+                <React.Fragment>
+                  <NavItem>
+                    <NavLink className="nav-link" to="/register" exact>
+                      Register
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink className="nav-link" to="/login" exact>
+                      Login
+                    </NavLink>
+                  </NavItem>
+                </React.Fragment>
               )}
             </Nav>
           </Collapse>
