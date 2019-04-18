@@ -20,12 +20,10 @@ export default class Header extends React.Component {
     super(props);
 
     this.state = {
-      collapsed: false,
-      dropdownOpen: false
+      collapsed: false
     };
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
   toggleNavbar() {
@@ -34,15 +32,10 @@ export default class Header extends React.Component {
     }));
   }
 
-  toggleDropdown() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }));
-  }
-
   render() {
     const { collapsed } = this.state;
     const { user, resetMe } = this.props;
+
     return (
       <Container>
         <Navbar color="faded" light>
@@ -62,17 +55,16 @@ export default class Header extends React.Component {
                     Admin
                   </NavLink>
                 </NavItem>
-                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown} nav>
-                  <DropdownToggle tag="a" href="#" className="nav-link" caret>
+                <NavItem>
+                  <NavLink className="nav-link" to="/perfil" exact>
                     {user.username}
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem>Perfil</DropdownItem>
-                    <DropdownItem tag="a" className="nav-link" href="#" onClick={resetMe}>
-                      Logout
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <a className="nav-link" href="#" onClick={resetMe}>
+                    Sair
+                  </a>
+                </NavItem>
               </React.Fragment>
             ) : (
               <NavItem>
@@ -101,17 +93,16 @@ export default class Header extends React.Component {
                       Admin
                     </NavLink>
                   </NavItem>
-                  <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown} nav>
-                    <DropdownToggle tag="a" href="#" className="nav-link" caret>
+                  <NavItem>
+                    <NavLink className="nav-link" to="/perfil" exact>
                       {user.username}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem>Perfil</DropdownItem>
-                      <DropdownItem tag="a" className="nav-link" href="#" onClick={resetMe}>
-                        Sair
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <a className="nav-link" href="#" onClick={resetMe}>
+                      Sair
+                    </a>
+                  </NavItem>
                 </React.Fragment>
               ) : (
                 <NavItem>

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Admin from '../views/Admin';
 import Home from '../views/Home';
 import Login from '../views/Login';
+import NotFound from '../views/NotFound';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +20,7 @@ export default class App extends React.Component {
           <Route path="/" component={Home} exact />
           <Route path="/login" component={Login} exact />
           <Route path="/admin" component={Admin} exact />
+          <Route path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>
     );

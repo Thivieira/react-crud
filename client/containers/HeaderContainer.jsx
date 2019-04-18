@@ -5,8 +5,7 @@ import { resetToken } from '../actions/authActions';
 
 const mapDispatchToProps = dispatch => {
   return {
-    resetMe: () => {
-      console.log('ue');
+    resetMe: e => {
       localStorage.removeItem('token');
       dispatch(resetToken());
     }
