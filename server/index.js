@@ -7,9 +7,9 @@ const middlewares = require('./utils/middlewares');
 const auth = require('./auth');
 const users = require('./users');
 
-app.set('port', process.env.PORT || 5000);
 const app = express();
 
+app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
 
 const whitelist = ['http://localhost:8080'];
