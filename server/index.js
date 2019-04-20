@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const middlewares = require('./utils/middlewares');
 const auth = require('./auth');
 const users = require('./users');
@@ -31,7 +32,7 @@ app.use('/api/', users);
 app.use(middlewares.ajaxMiddleware);
 app.use(middlewares.verifyTokenMiddleware);
 
-app.get('*', (req, res) => res.sendFile(`${__dirname}/dist/index.html`));
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', 'dist/index.html')));
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
