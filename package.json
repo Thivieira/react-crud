@@ -12,6 +12,9 @@
     "clean": "rimraf dist",
     "lint": "eslint **/*.js --ignore-pattern node_modules/"
   },
+  "engines": {
+    "node": "10.14.1"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "bcrypt": "^3.0.6",
