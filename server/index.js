@@ -7,7 +7,7 @@ const middlewares = require('./utils/middlewares');
 const auth = require('./auth');
 const users = require('./users');
 
-const PORT = process.env.PORT;
+app.set('port', process.env.PORT || 5000);
 const app = express();
 
 app.use(bodyParser.json());
@@ -34,7 +34,7 @@ app.use(middlewares.verifyTokenMiddleware);
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', 'dist/index.html')));
 
-app.listen(PORT, () => {
+app.listen(app.get('port'), () => {
   // eslint-disable-next-line no-console
-  console.log(`Server running in http://localhost:${PORT}`);
+  console.log(`Server running in port ${PORT}`);
 });
