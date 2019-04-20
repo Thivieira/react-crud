@@ -7,7 +7,7 @@ const middlewares = require('./utils/middlewares');
 const auth = require('./auth');
 const users = require('./users');
 
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT;
 const app = express();
 
 app.use(bodyParser.json());
