@@ -8,7 +8,7 @@
     "server-dev": "nodemon server/index.js",
     "dev": "webpack-dev-server --mode development",
     "build": "npm run clean && webpack --mode production",
-    "heroku-postbuild": "npm run build && npm start",
+    "heroku-postbuild": "npm run build",
     "clean": "rimraf dist",
     "lint": "eslint **/*.js --ignore-pattern node_modules/"
   },
