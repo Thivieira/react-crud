@@ -36,5 +36,5 @@ app.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', 'dist/index.h
 
 app.listen(app.get('port'), () => {
   // eslint-disable-next-line no-console
-  console.log(`Server running in port ${PORT}`);
+  console.log(`Server running in port ${app.get('port')}`);
 });
