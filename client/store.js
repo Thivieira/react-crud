@@ -11,8 +11,6 @@ function root(state = initialState, action) {
   return state;
 }
 
-const devTools = 
-
 const persistedState = loadState();
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
@@ -24,7 +22,7 @@ const store = createStore(
   persistedState,
   compose(
     applyMiddleware(thunk, logger)
-  //  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    //  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
