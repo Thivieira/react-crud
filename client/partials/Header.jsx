@@ -15,6 +15,45 @@ import {
 
 import { NavLink } from 'react-router-dom';
 
+const AuthRoutes = ({ user, resetMe }) =>
+  user.token ? (
+    <React.Fragment>
+      <NavItem>
+        <NavLink className="nav-link" to="/admin" exact>
+          Admin
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink className="nav-link" to="/users" exact>
+          Usuários
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink className="nav-link" to="/profile" exact>
+          {user.username}
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <a className="nav-link" href="#" onClick={resetMe}>
+          Sair
+        </a>
+      </NavItem>
+    </React.Fragment>
+  ) : (
+    <React.Fragment>
+      <NavItem>
+        <NavLink className="nav-link" to="/register" exact>
+          Register
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink className="nav-link" to="/login" exact>
+          Login
+        </NavLink>
+      </NavItem>
+    </React.Fragment>
+  );
+
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +73,6 @@ export default class Header extends React.Component {
 
   render() {
     const { collapsed } = this.state;
-    const { user, resetMe } = this.props;
 
     return (
       <Container>
@@ -48,38 +86,7 @@ export default class Header extends React.Component {
                 Home
               </NavLink>
             </NavItem>
-            {user.token ? (
-              <React.Fragment>
-                <NavItem>
-                  <NavLink className="nav-link" to="/admin" exact>
-                    Admin
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className="nav-link" to="/profile" exact>
-                    {user.username}
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <a className="nav-link" href="#" onClick={resetMe}>
-                    Sair
-                  </a>
-                </NavItem>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                <NavItem>
-                  <NavLink className="nav-link" to="/register" exact>
-                    Register
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className="nav-link" to="/login" exact>
-                    Login
-                  </NavLink>
-                </NavItem>
-              </React.Fragment>
-            )}
+            <AuthRoutes {...this.props} />
           </Nav>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2 d-md-none" />
           <Collapse isOpen={collapsed} navbar>
@@ -93,38 +100,7 @@ export default class Header extends React.Component {
                   Home
                 </NavLink>
               </NavItem>
-              {user.token ? (
-                <React.Fragment>
-                  <NavItem>
-                    <NavLink className="nav-link" to="/admin" exact>
-                      Admin
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink className="nav-link" to="/perfil" exact>
-                      {user.username}
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <a className="nav-link" href="#" onClick={resetMe}>
-                      Sair
-                    </a>
-                  </NavItem>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  <NavItem>
-                    <NavLink className="nav-link" to="/register" exact>
-                      Register
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink className="nav-link" to="/login" exact>
-                      Login
-                    </NavLink>
-                  </NavItem>
-                </React.Fragment>
-              )}
+              <AuthRoutes {...this.props} />
             </Nav>
           </Collapse>
         </Navbar>

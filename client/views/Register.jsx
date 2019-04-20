@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Button, FormGroup, Label } from 'reactstrap';
+import { Container } from 'reactstrap';
 import BaseLayout from '../layouts/BaseLayout';
 import RegisterFormContainer from '../containers/RegisterFormContainer';
 

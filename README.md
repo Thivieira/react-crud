@@ -15,3 +15,9 @@ Part of an interview challenge.
 - Inspiration for form validation
   https://learnetto.com/blog/how-to-do-simple-form-validation-in-reactjs
   https://github.com/learnetto/react-form-validation-demo
+
+- Inspiration for table pagination
+  https://scotch.io/tutorials/build-custom-pagination-with-react
+
+- Inspiration for modal based crud
+  https://github.com/olinations/crud-starter-frontend

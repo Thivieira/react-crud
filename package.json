@@ -8,7 +8,7 @@
     "server-dev": "nodemon server/index.js",
     "dev": "webpack-dev-server --mode development",
     "build": "npm run clean && webpack --mode production",
-    "heroku-postbuild": "yarn run build",
+    "heroku-postbuild": "npm run build && npm start",
     "clean": "rimraf dist",
     "lint": "eslint **/*.js --ignore-pattern node_modules/"
   },
@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",

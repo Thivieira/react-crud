@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Jumbotron, Button } from 'reactstrap';
 import BaseLayout from '../layouts/BaseLayout';
-import AuthContainer from '../containers/AuthContainer';
+import AuthHOCContainer from '../containers/AuthHOCContainer';
 class Admin extends React.Component {
   constructor(props) {
     super(props);
@@ -19,4 +19,4 @@ class Admin extends React.Component {
   }
 }
 
-export default AuthContainer(Admin);
+export default AuthHOCContainer(Admin);

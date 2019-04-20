@@ -6,11 +6,16 @@ export const ME_FROM_TOKEN_SUCCESS = 'ME_FROM_TOKEN_SUCCESS';
 export const ME_FROM_TOKEN_FAILURE = 'ME_FROM_TOKEN_FAILURE';
 export const RESET_TOKEN = 'RESET_TOKEN';
 
+//Sign Up User
+export const SIGNUP_USER = 'SIGNUP_USER';
+export const SIGNUP_USER_SUCCESS = 'SIGNUP_USER_SUCCESS';
+export const SIGNUP_USER_FAILURE = 'SIGNUP_USER_FAILURE';
+export const RESET_USER = 'RESET_USER';
+
 //Sign In User
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
-export const RESET_USER = 'RESET_USER';
 
 //called when email is updated in profile to update main user's email state
 export const UPDATE_USER_EMAIL = 'UPDATE_USER_EMAIL';
@@ -52,6 +57,30 @@ export function resetToken() {
   //used for logout
   return {
     type: RESET_TOKEN
+  };
+}
+
+export function signUpUser(formValues) {
+  return dispatch => {
+    return axios({
+      method: 'post',
+      url: `${ROOT_URL}/users/signup`,
+      data: formValues
+    });
+  };
+}
+
+export function signUpUserSuccess(user) {
+  return {
+    type: SIGNUP_USER_SUCCESS,
+    payload: user
+  };
+}
+
+export function signUpUserFailure(error) {
+  return {
+    type: SIGNUP_USER_FAILURE,
+    payload: error
   };
 }
 

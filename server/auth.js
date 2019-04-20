@@ -6,6 +6,39 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const generateToken = require('./utils').generateToken;
 const users = require('./utils/users');
+const validate = require('./utils/validate');
+
+router.post('/users/signup', function(req, res, next) {
+  var body = req.body;
+
+  var errors = validate.validateSignUpForm(body);
+  if (errors) {
+    return res.status(403).json(errors);
+  }
+
+  var hash = bcrypt.hashSync(body.password.trim(), 10);
+
+  var user = {
+    nome: body.nome.trim(),
+    telefone: body.telefone.trim(),
+    email: body.email.trim(),
+    username: body.username.trim(),
+    password: hash
+  };
+
+  users.push(user);
+
+  console.log(users);
+
+  var token = generateToken(user);
+
+  let userCopy = JSON.parse(JSON.stringify(user));
+  delete userCopy.password;
+  res.json({
+    user: userCopy,
+    token
+  });
+});
 
 router.post('/users/signin', function(req, res) {
   let user;
@@ -44,7 +77,18 @@ router.get('/me/from/token', (req, res, next) => {
   }
 
   jwt.verify(token, process.env.JWT_SECRET, (err, userTkn) => {
-    if (err) throw err;
+    if (err) {
+      if (err.message === 'jwt expired') {
+        return res.status(401).json({
+          error: true,
+          message: { message: 'Token expirado.' }
+        });
+      }
+      return res.status(401).json({
+        error: true,
+        message: err
+      });
+    }
 
     const user = users.find(function(user) {
       return user.id == userTkn.id;

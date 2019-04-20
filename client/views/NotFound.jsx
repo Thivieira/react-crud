@@ -13,7 +13,7 @@ export default () => (
       }}
     >
       <h1
-        class="display-5"
+        className="display-5"
         style={{
           textAlign: 'center'
         }}

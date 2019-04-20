@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const middlewares = require('./utils/middlewares');
 const auth = require('./auth');
+const users = require('./users');
 
 const PORT = 9000 || process.env.PORT;
 const app = express();
@@ -25,6 +26,7 @@ app.use(cors(corsOptions));
 app.use(express.static('dist'));
 
 app.use('/api/', auth);
+app.use('/api/', users);
 
 app.use(middlewares.ajaxMiddleware);
 app.use(middlewares.verifyTokenMiddleware);

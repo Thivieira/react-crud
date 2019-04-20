@@ -3,6 +3,9 @@ import {
   ME_FROM_TOKEN_SUCCESS,
   ME_FROM_TOKEN_FAILURE,
   RESET_TOKEN,
+  SIGNUP_USER,
+  SIGNUP_USER_SUCCESS,
+  SIGNUP_USER_FAILURE,
   LOGIN_USER,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
@@ -56,7 +59,21 @@ export default function(state = INITIAL_STATE, action) {
         error: error,
         loading: false
       };
-    case RESET_TOKEN: // remove token from storage make loading = false
+    case SIGNUP_USER:
+      return { ...state, user: { token: null }, status: 'signup', error: null, loading: true };
+    case SIGNUP_USER_SUCCESS:
+      return {
+        ...state,
+        user: { ...action.payload.user, token: action.payload.token },
+        status: 'authenticated',
+        error: null,
+        loading: false
+      };
+    case SIGNUP_USER_FAILURE:
+      error = action.payload.data || { message: action.payload.message }; //2nd one is network or server down errors
+      return { ...state, user: { token: null }, status: 'signup', error: error, loading: false };
+
+    case RESET_TOKEN:
       return {
         ...state,
         user: { token: null },
@@ -65,7 +82,7 @@ export default function(state = INITIAL_STATE, action) {
         loading: false
       };
 
-    case LOGIN_USER: // sign in user,  set loading = true and status = signin
+    case LOGIN_USER:
       return {
         ...state,
         user: { token: null },
@@ -73,16 +90,16 @@ export default function(state = INITIAL_STATE, action) {
         error: null,
         loading: true
       };
-    case LOGIN_USER_SUCCESS: //return authenticated user,  make loading = false and status = authenticated
+    case LOGIN_USER_SUCCESS:
       return {
         ...state,
         user: { ...action.payload.user, token: action.payload.token },
         status: 'AUTHENTICATED',
         error: null,
         loading: false
-      }; //<-- authenticated
-    case LOGIN_USER_FAILURE: // return error and make loading = false
-      error = action.payload.data || { message: action.payload.message }; //2nd one is network or server down errors
+      };
+    case LOGIN_USER_FAILURE:
+      error = action.payload.data || { message: action.payload.message };
       return {
         ...state,
         user: { token: null },
@@ -106,7 +123,7 @@ export default function(state = INITIAL_STATE, action) {
         loading: false
       };
 
-    case RESET_USER: // reset authenticated user to initial state
+    case RESET_USER:
       return { ...state, user: { token: null }, status: null, error: null, loading: false };
 
     default:
